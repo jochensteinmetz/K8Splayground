@@ -1,17 +1,15 @@
-{
-      "kind": "Service",
-      "apiVersion": "v1",
-      "metadata": {
-        "name": "hello-node"
-      },
-      "spec": {
-        "ports": [{
-          "port": 8080,
-          "targetPort": 8080
-        }],
-        "selector": {
-          "app": "example"
-        },
-        "type": "LoadBalancer"
-      }
-    }
+kind: Service
+apiVersion: v1
+metadata:
+  name: hello-node
+annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+spec:
+  selector:
+    app: hello-node
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+
+type: LoadBalancer
